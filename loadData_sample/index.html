@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- v8.0.0の場合は動作する -->
+    <script src="https://cdn.jsdelivr.net/gh/handsontable/handsontable@release/8.0.0-beta.1/dist/handsontable.full.js">
+    </script>
+    <!-- v7.3.0の場合は動作しない-->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/handsontable@7.3.0/dist/handsontable.full.min.js">
+    </script>
+    -->
+    <link type="text/css"
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/handsontable@7.3.0/dist/handsontable.full.min.css">
+</head>
+<body>
+    <h3>二次元配列版</h3>
+    <div id="array"></div>
+    <hr />
+
+    <h3>オブジェクト配列版</h3>
+    <div id="object"></div>
+    <hr />
+
+    <h3>オブジェクト生成時にオブジェクト配列を渡す版</h3>
+    <div id="creation"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            // 二次元配列データをloadData
+            const arrayData = [
+                ['りんご', 100],
+                ['みかん', 200]
+            ]
+            load('array', arrayData);
+
+            // オブジェクトの配列データをloadData
+            const objectData = [
+                {name: 'りんご', price: 100},
+                {name: 'みかん', price: 200}
+            ]
+            load('object', objectData);
+
+            // オブジェクトの配列データをオブジェクト生成時に渡す
+            const element = document.getElementById('creation');
+            const ht = new Handsontable(element, {
+                data: objectData,
+                licenseKey: 'your license'
+            });
+        });
+
+        function load(divId, data) {
+            const element = document.getElementById(divId);
+            const table = new Handsontable(element, {
+                licenseKey: 'your license'
+            });
+            table.loadData(data);
+        }
+    </script>
+</body>
+</html>
